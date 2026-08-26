@@ -777,7 +777,22 @@ variant-picker fieldset[data-option-id] > legend {
   .footer-content,
   .footer-content[style*="--grid-columns: 4"] {
     grid-template-columns: 1fr !important;
-    gap: 30px !important;
+    /* Row gap is 0 so the three drawer rows sit flush against each other and
+       read as one list; the non-drawer columns get their own margins below. */
+    gap: 0 !important;
+  }
+
+  /* Brand column, then CONTACT, then the bottom bar keep breathing room */
+  .footer-content > :first-child {
+    margin-bottom: 26px;
+  }
+
+  .footer-content[style*="--grid-columns: 4"] > :nth-child(5) {
+    margin-top: 28px;
+  }
+
+  .footer-content[style*="--grid-columns: 4"] > :nth-child(5) .group-block-content {
+    gap: 10px !important;
   }
 
   /* Drop the desktop column indents */
@@ -835,5 +850,102 @@ variant-picker fieldset[data-option-id] > legend {
 
   .footer-content[style*="--grid-columns: 4"] > :last-child a {
     margin-left: 0 !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   MOBILE FOOTER DRAWERS (<= 749px)
+
+   MY ACCOUNT / SHOP / SUPPORT collapse into tap-to-open rows.
+   The .everlooms-fdrawer classes are added by everlooms-footer-drawers.js
+   only while this breakpoint matches, so nothing here can reach desktop.
+   ------------------------------------------------------------------ */
+@media screen and (max-width: 749px) {
+  .everlooms-fdrawer {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Close the list off under the last drawer. Bordering the drawer itself
+     rather than its next sibling keeps the line tight against the list -
+     the sibling carries a 28px top margin. */
+  .everlooms-fdrawer:not(:has(+ .everlooms-fdrawer)) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .everlooms-fdrawer > .group-block-content {
+    gap: 0 !important;
+  }
+
+  /* The heading row is the tap target */
+  .everlooms-fdrawer__heading {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 0 !important;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .everlooms-fdrawer__heading p {
+    margin: 0;
+  }
+
+  .everlooms-fdrawer__heading:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.6);
+    outline-offset: 2px;
+  }
+
+  /* Chevron, rotated when the row is open */
+  .everlooms-fdrawer__heading::after {
+    content: "";
+    flex: none;
+    width: 8px;
+    height: 8px;
+    margin-right: 2px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 220ms ease;
+  }
+
+  .everlooms-fdrawer.is-open .everlooms-fdrawer__heading::after {
+    transform: translateY(2px) rotate(-135deg);
+  }
+
+  /* Collapsed panel. visibility keeps the hidden links out of the tab order. */
+  .everlooms-fdrawer__panel {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-height 280ms ease,
+      opacity 180ms ease,
+      visibility 0s linear 280ms;
+  }
+
+  .everlooms-fdrawer.is-open .everlooms-fdrawer__panel {
+    max-height: 340px;
+    opacity: 1;
+    visibility: visible;
+    padding-bottom: 14px;
+    transition:
+      max-height 280ms ease,
+      opacity 220ms ease,
+      visibility 0s;
+  }
+
+  .everlooms-fdrawer__panel p {
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .everlooms-fdrawer__heading::after,
+    .everlooms-fdrawer__panel {
+      transition: none;
+    }
   }
 }
