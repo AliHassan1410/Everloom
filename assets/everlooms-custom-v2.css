@@ -882,7 +882,7 @@ variant-picker fieldset[data-option-id] > legend {
     flex-direction: row !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    gap: 6px;
+    gap: 10px;
     width: 100%;
     padding: 14px 0 !important;
     cursor: pointer;
