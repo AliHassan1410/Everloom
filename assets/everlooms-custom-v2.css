@@ -616,6 +616,7 @@ header-actions {
           padding-top: 24px;
           margin-top: 8px;
           }
+        }  /* end desktop-only footer grid; pill styles below are intentionally global */
         .footer-content[style*="--grid-columns: 4"] > :last-child a {
           display: inline-flex;
           align-items: center;
@@ -649,7 +650,6 @@ header-actions {
           -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'><path d='M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.9h-2.34V22c4.78-.8 8.44-4.95 8.44-9.94z'/></svg>");
           mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'><path d='M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.9h-2.34V22c4.78-.8 8.44-4.95 8.44-9.94z'/></svg>");
           }
-        }
 .footer-content .logo-block__image {
   margin-inline: auto;
 }
@@ -760,3 +760,80 @@ variant-picker fieldset[data-option-id] > legend {
 .footer-content > :first-child p:hover {
           color: #ffffff;
           }
+
+/* ------------------------------------------------------------------
+   MOBILE FOOTER (<= 749px)
+
+   The desktop footer rules earlier in this file (5-column grid, 80px
+   column indents, justified body text, 40px bottom-bar margins) were
+   written WITHOUT a media query, so they were also applying on phones.
+   On a ~360px screen that squeezed each column to roughly 60px wide,
+   which is what produced the one-word-per-line address and the cramped
+   two-up layout. This block resets those rules for small screens only;
+   the >= 990px desktop layout is untouched.
+   ------------------------------------------------------------------ */
+@media screen and (max-width: 749px) {
+  /* Stack every footer column full width */
+  .footer-content,
+  .footer-content[style*="--grid-columns: 4"] {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  /* Drop the desktop column indents */
+  .footer-content > :first-child,
+  .footer-content[style*="--grid-columns: 4"] > :nth-child(2),
+  .footer-content[style*="--grid-columns: 4"] > :nth-child(3),
+  .footer-content[style*="--grid-columns: 4"] > :nth-child(4),
+  .footer-content[style*="--grid-columns: 4"] > :nth-child(5) {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  /* Justified text in a narrow column is what caused the huge word gaps */
+  .footer-content > :first-child p {
+    text-align: left !important;
+  }
+
+  /* Left-align the logo with the copy underneath it */
+  .footer-content .logo-block__image {
+    margin-inline: 0 !important;
+    max-height: 52px;
+  }
+
+  /* Comfortable tap targets for the link lists */
+  .footer-content a {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  /* Bottom bar: copyright stacked above the social buttons, both left-aligned */
+  .footer-content[style*="--grid-columns: 4"] > :last-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 22px;
+    margin-top: 4px;
+  }
+
+  .footer-content[style*="--grid-columns: 4"] > :last-child .group-block-content {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .footer-content[style*="--grid-columns: 4"] > :last-child .group-block-content > *:first-child,
+  .footer-content[style*="--grid-columns: 4"] > :last-child .group-block-content > *:last-child {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  .footer-content[style*="--grid-columns: 4"] > :last-child .group-block-content > *:last-child {
+    gap: 10px !important;
+    flex-wrap: wrap;
+  }
+
+  .footer-content[style*="--grid-columns: 4"] > :last-child a {
+    margin-left: 0 !important;
+  }
+}
