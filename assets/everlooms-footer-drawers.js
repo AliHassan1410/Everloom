@@ -70,6 +70,28 @@
     });
   }
 
+  // The three labels are different lengths, so pin every chevron to the width
+  // of the widest one to line them up vertically. Measured rather than
+  // hardcoded so renaming a heading in the theme editor cannot break the
+  // alignment, and so webfont metrics are accounted for.
+  function alignLabels() {
+    const container = document.querySelector(".footer-content");
+    if (!container) return;
+
+    container.style.removeProperty("--everlooms-fdrawer-label-width");
+    if (!mql.matches || !drawers.length) return;
+
+    const widest = drawers.reduce((max, drawer) => {
+      const label = drawer.heading.firstElementChild;
+      if (!label) return max;
+      return Math.max(max, label.getBoundingClientRect().width);
+    }, 0);
+
+    if (widest > 0) {
+      container.style.setProperty("--everlooms-fdrawer-label-width", Math.ceil(widest) + "px");
+    }
+  }
+
   function sync() {
     drawers = collect();
     drawers.forEach((drawer, index) => {
@@ -79,6 +101,7 @@
         disable(drawer);
       }
     });
+    alignLabels();
   }
 
   function toggleFrom(target) {
@@ -118,4 +141,9 @@
   }
 
   document.addEventListener("shopify:section:load", sync);
+
+  // Webfonts land after first paint and change the measured label widths.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(alignLabels);
+  }
 })();

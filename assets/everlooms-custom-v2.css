@@ -898,6 +898,9 @@ variant-picker fieldset[data-option-id] > legend {
     max-inline-size: none !important;
     text-align: left !important;
     margin: 0 !important;
+    /* Set by everlooms-footer-drawers.js to the widest label, so the three
+       chevrons line up vertically while still sitting beside their text. */
+    min-width: var(--everlooms-fdrawer-label-width, 0);
   }
 
   .everlooms-fdrawer__heading:focus-visible {
