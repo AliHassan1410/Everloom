@@ -873,12 +873,16 @@ variant-picker fieldset[data-option-id] > legend {
     gap: 0 !important;
   }
 
-  /* The heading row is the tap target */
+  /* The heading row is the tap target.
+     .text-block is a COLUMN flex container in snippets/text.liquid, so
+     flex-direction has to be overridden too - otherwise the chevron lands on
+     the line below the label. */
   .everlooms-fdrawer__heading {
     display: flex !important;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 6px;
     width: 100%;
     padding: 14px 0 !important;
     cursor: pointer;
@@ -886,8 +890,14 @@ variant-picker fieldset[data-option-id] > legend {
     -webkit-tap-highlight-color: transparent;
   }
 
-  .everlooms-fdrawer__heading p {
-    margin: 0;
+  /* snippets/text.liquid sets `.text-block > * { width: var(--width) }`, which
+     is 100% for these headings and stretches the label across the whole row,
+     pushing the chevron to the far edge. Size the label to its text instead. */
+  .everlooms-fdrawer__heading > * {
+    width: auto !important;
+    max-inline-size: none !important;
+    text-align: left !important;
+    margin: 0 !important;
   }
 
   .everlooms-fdrawer__heading:focus-visible {
