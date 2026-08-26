@@ -782,6 +782,14 @@ variant-picker fieldset[data-option-id] > legend {
     gap: 0 !important;
   }
 
+  /* Inset the whole footer from the screen edge. The section's page-width
+     gutter alone leaves the copy sitting hard against the left edge once the
+     desktop 80px column indents are removed. */
+  .footer-content {
+    padding-inline-start: 14px;
+    padding-inline-end: 14px;
+  }
+
   /* Brand column, then CONTACT, then the bottom bar keep breathing room */
   .footer-content > :first-child {
     margin-bottom: 26px;
@@ -861,17 +869,6 @@ variant-picker fieldset[data-option-id] > legend {
    only while this breakpoint matches, so nothing here can reach desktop.
    ------------------------------------------------------------------ */
 @media screen and (max-width: 749px) {
-  .everlooms-fdrawer {
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  /* Close the list off under the last drawer. Bordering the drawer itself
-     rather than its next sibling keeps the line tight against the list -
-     the sibling carries a 28px top margin. */
-  .everlooms-fdrawer:not(:has(+ .everlooms-fdrawer)) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
   .everlooms-fdrawer > .group-block-content {
     gap: 0 !important;
   }
@@ -880,10 +877,10 @@ variant-picker fieldset[data-option-id] > legend {
   .everlooms-fdrawer__heading {
     display: flex !important;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    justify-content: flex-start;
+    gap: 8px;
     width: 100%;
-    padding: 16px 0 !important;
+    padding: 14px 0 !important;
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
@@ -902,9 +899,8 @@ variant-picker fieldset[data-option-id] > legend {
   .everlooms-fdrawer__heading::after {
     content: "";
     flex: none;
-    width: 8px;
-    height: 8px;
-    margin-right: 2px;
+    width: 7px;
+    height: 7px;
     border-right: 1.5px solid currentColor;
     border-bottom: 1.5px solid currentColor;
     transform: translateY(-2px) rotate(45deg);
