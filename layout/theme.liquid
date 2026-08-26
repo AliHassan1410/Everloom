@@ -7,11 +7,24 @@
 >
   <head>
     {%- if settings.favicon != blank -%}
-      <link
-        rel="icon"
-        type="image/png"
-        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
-      >
+      {%- liquid
+        # Shopify's CDN cannot rasterise SVG, and it serves .svg with
+        # X-Content-Type-Options: nosniff. Declaring type="image/png" for an SVG
+        # therefore makes the browser reject the icon outright, so the declared
+        # type has to follow the actual file.
+        assign favicon_src = settings.favicon | image_url: width: 192, height: 192
+        assign favicon_is_svg = false
+        if favicon_src contains '.svg'
+          assign favicon_is_svg = true
+        endif
+      -%}
+      {%- if favicon_is_svg -%}
+        <link rel="icon" type="image/svg+xml" href="{{ favicon_src }}">
+      {%- else -%}
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{ favicon_src }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+      {%- endif -%}
     {%- endif -%}
 
     {% comment %}
