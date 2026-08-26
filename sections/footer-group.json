@@ -1,0 +1,209 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": {
+    "footer_m9NzUG": {
+      "type": "footer",
+      "blocks": {
+        "group_account": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 14,
+            "width": "fill"
+          },
+          "blocks": {
+            "account_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<p>MY ACCOUNT</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "h6",
+                "font": "var(--font-subheading--family)",
+                "case": "uppercase"
+              },
+              "blocks": {}
+            },
+            "account_links": {
+              "type": "text",
+              "settings": {
+                "text": "<p><a href=\"/account\">My Account</a></p><p><a href=\"/pages/wishlist\">My Wishlist</a></p><p><a href=\"/cart\">My Cart</a></p><p><a href=\"/account/login\">Sign In</a></p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-subheading--family)",
+                "case": "none"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "account_heading",
+            "account_links"
+          ]
+        },
+        "group_quickview": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 14,
+            "width": "fill"
+          },
+          "blocks": {
+            "quickview_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<p>SHOP</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "h6",
+                "font": "var(--font-subheading--family)",
+                "case": "none"
+              },
+              "blocks": {}
+            },
+            "quickview_links": {
+              "type": "text",
+              "settings": {
+                "text": "<p><a href=\"/collections/men\">Men</a></p><p><a href=\"/collections/women\">Women</a></p><p><a href=\"/collections/all\">All Products</a></p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-subheading--family)",
+                "case": "none"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "quickview_heading",
+            "quickview_links"
+          ]
+        },
+        "group_support": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 14,
+            "width": "fill"
+          },
+          "blocks": {
+            "support_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<p>SUPPORT</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "h6",
+                "font": "var(--font-subheading--family)",
+                "case": "uppercase"
+              },
+              "blocks": {}
+            },
+            "support_links": {
+              "type": "text",
+              "settings": {
+                          "text": "<p><a href=\"/pages/terms\">Terms &amp; Conditions</a></p><p><a href=\"/pages/privacy-policy\">Privacy Policy</a></p><p><a href=\"/pages/refund-policy\">Refund Policy</a></p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-subheading--family)",
+                "case": "none"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "support_heading",
+            "support_links"
+          ]
+        },
+        "group_brand": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "left",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "left",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 12,
+            "width": "fill"
+          },
+          "blocks": {
+            "brand_logo": {
+              "type": "logo",
+              "settings": {
+                "inverse": true,
+                "unit": "px",
+                "pixel_height": 80
+              },
+              "blocks": {}
+            },
+            "brand_tagline": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Comfortable, quality essentials for men and women.</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "case": "none"
+              },
+              "blocks": {}
+            },
+            "brand_address": { "type": "text", "settings": { "text": "<p>96 H Street 13, Sukh Chayn Gardens,<br>Canal Road, Lahore,<br>Lahore 53720, Pakistan</p>", "width": "100%", "alignment": "left", "type_preset": "paragraph", "font": "var(--font-body--family)", "case": "none" }, "blocks": {} }
+          },
+          "block_order": [
+            "brand_logo",
+            "brand_tagline",
+            "brand_address"
+          ]
+        },
+        "group_contact": { "type": "group", "settings": { "content_direction": "column", "vertical_on_mobile": true, "horizontal_alignment": "left", "vertical_alignment": "center", "horizontal_alignment_flex_direction_column": "left", "vertical_alignment_flex_direction_column": "flex-start", "gap": 14, "width": "fill" }, "blocks": { "contact_heading": { "type": "text", "settings": { "text": "<p>CONTACT</p>", "width": "100%", "alignment": "left", "type_preset": "h6", "font": "var(--font-subheading--family)", "case": "uppercase" }, "blocks": {} }, "contact_name": { "type": "text", "settings": { "text": "<p><a href=\"/pages/contact\">Contact Us</a></p>", "width": "100%", "alignment": "left", "type_preset": "paragraph", "font": "var(--font-body--family)", "case": "none" }, "blocks": {} }, "contact_phone": { "type": "text", "settings": { "text": "<p><a href=\"tel:+923304114118\">+92 330 4114118</a></p>", "width": "100%", "alignment": "left", "type_preset": "paragraph", "font": "var(--font-body--family)", "case": "none" }, "blocks": {} }, "contact_email": { "type": "text", "settings": { "text": "<p><a href=\"mailto:admin@everlooms.com\">admin@everlooms.com</a></p>", "width": "100%", "alignment": "left", "type_preset": "paragraph", "font": "var(--font-body--family)", "case": "none" }, "blocks": {} } }, "block_order": ["contact_heading", "contact_name", "contact_phone", "contact_email"] }, "group_bottombar": { "type": "group", "settings": { "content_direction": "row", "horizontal_alignment": "space-between", "vertical_alignment": "center", "gap": 16, "width": "fill", "padding-block-start": 24 }, "blocks": { "bottombar_copyright": { "type": "text", "settings": { "text": "<p>Copyright \u00a9 2026 \u2013 Everlooms</p>", "width": "100%", "alignment": "left", "type_preset": "paragraph", "font": "var(--font-body--family)", "case": "none" }, "blocks": {} }, "bottombar_social": { "type": "text", "settings": { "text": "<p><a href=\"https://www.instagram.com/\">Instagram</a></p><p><a href=\"https://www.facebook.com/\">Facebook</a></p>", "width": "100%", "alignment": "right", "type_preset": "paragraph", "font": "var(--font-body--family)", "case": "none" }, "blocks": {} } }, "block_order": ["bottombar_copyright", "bottombar_social"] },
+      },
+      "block_order": [
+        "group_brand",
+        "group_account",
+        "group_quickview",
+        "group_support", "group_contact", "group_bottombar"
+      ],
+      "name": "t:names.footer",
+      "settings": {
+        "section_width": "page-width",
+        "gap": 40,
+        "background_color": "#000000",
+        "padding-block-start": 40,
+        "padding-block-end": 20
+      }
+    }
+  },
+  "order": [
+    "footer_m9NzUG"
+  ]
+}

@@ -1,0 +1,111 @@
+{%- comment -%}
+  Decorative login page matching the Everlooms React storefront's "Welcome
+  back" screen exactly. Shopify's real passwordless login is hosted entirely
+  off-theme (shopify.com/{shop_id}/account) with no API/theme customization
+  surface, so this page can't submit the code request itself - it exists to
+  give guests the on-brand entry screen, then hands off to the real hosted
+  login on submit.
+{%- endcomment -%}
+
+<div class="everlooms-login">
+  <h1 class="everlooms-login__title">Welcome back</h1>
+  <p class="everlooms-login__subcopy">Enter your email and we will send a secure login code.</p>
+
+  <form class="everlooms-login__card" action="{{ routes.account_login_url }}" method="get">
+    <label class="everlooms-login__label" for="everlooms-login-email">Email</label>
+    <input
+      class="everlooms-login__input"
+      type="email"
+      id="everlooms-login-email"
+      name="email"
+      autocomplete="email"
+      required
+    >
+
+    <button type="submit" class="everlooms-login__button">Send login code</button>
+
+    <p class="everlooms-login__helper">
+      No password needed. Guest checkout customers can use the same email to view orders.
+    </p>
+  </form>
+</div>
+
+{% stylesheet %}
+  .everlooms-login {
+    max-width: 34rem;
+    margin-inline: auto;
+    padding: 4rem 1.5rem 5rem;
+    text-align: center;
+  }
+
+  .everlooms-login__title {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  .everlooms-login__subcopy {
+    margin: 0.75rem 0 0;
+    color: #666666;
+    font-size: 0.9375rem;
+  }
+
+  .everlooms-login__card {
+    margin-top: 2rem;
+    background: #ffffff;
+    border: 1px solid #ECE4E0;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    padding: 2rem;
+    text-align: left;
+  }
+
+  .everlooms-login__label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .everlooms-login__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 1rem;
+    border: 1px solid #DDD4CF;
+    border-radius: var(--style-border-radius-inputs, 12px);
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .everlooms-login__button {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: var(--color-primary-button-background);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--style-border-radius-buttons-primary, 12px);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .everlooms-login__button:hover {
+    opacity: 0.92;
+  }
+
+  .everlooms-login__helper {
+    margin: 1rem 0 0;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: #666666;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Login content",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,111 @@
+{%- comment -%}
+  Hardcoded Privacy Policy content, mirroring the Everlooms React storefront's
+  /info/privacy page (src/lib/content.ts "privacy" entry) 1:1. Not merchant-editable
+  by design — this is the same fixed legal copy as the React site, not admin-authored text.
+{%- endcomment -%}
+
+<div class="everlooms-policy-page">
+  <nav class="everlooms-policy-breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="everlooms-policy-breadcrumb__sep">/</span>
+    <span>Privacy Policy</span>
+  </nav>
+
+  <h1 class="everlooms-policy-title">Privacy Policy</h1>
+  <p class="everlooms-policy-intro">How we handle your information.</p>
+
+  <div class="everlooms-policy-sections">
+    <section>
+      <h2>Introduction</h2>
+      <p>Welcome to Everlooms! We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us at +92 330 4114118.
+When you visit our website everlooms.com, and use our services, you trust us with your personal information. We take your privacy very seriously. In this privacy policy, we describe our privacy practices. We seek to explain to you in the clearest way possible what information we collect, how we use it, and what rights you have in relation to it. We hope you take some time to read through it carefully, as it is important. If there are any terms in this privacy policy that you do not agree with, please discontinue use of our Site and our services.
+This privacy policy applies to all information collected through our Site, and/or any related services, sales, marketing, or events (we refer to them collectively in this privacy policy as the "Services").</p>
+    </section>
+
+    <section>
+      <h2>Information We Collect</h2>
+      <p>We collect personal information that you voluntarily provide to us when registering at the Site, expressing an interest in obtaining information about us or our products and services, when participating in activities on the Site (such as posting messages in our online forums or entering competitions, contests, or giveaways) or otherwise contacting us.
+The personal information that we collect depends on the context of your interactions with us and the Site, the choices you make, and the products and features you use. The personal information we collect may include the following:
+Personal Information Provided by You: We collect names; phone numbers; email addresses; mailing addresses; job titles; contact preferences; contact or authentication data; billing addresses; and other similar information.
+Payment Data: We collect data necessary to process your payment if you make purchases, such as your payment instrument number (such as a credit card number), and the security code associated with your payment instrument. All payment data is stored by our payment processor and you should review its privacy policies and contact the payment processor directly to respond to your questions.
+Social Media Login Data: We may provide you with the option to register with us using your existing social media account details, like your Facebook, Twitter, or other social media account. If you choose to register in this way, we will collect the information described in the section called "HOW DO WE HANDLE YOUR SOCIAL LOGINS" below.</p>
+    </section>
+
+    <section>
+      <h2>How We Use Your Information</h2>
+      <p>We use personal information collected via our Site for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations. We indicate the specific processing grounds we rely on next to each purpose listed below.
+We use the information we collect or receive:
+To facilitate account creation and the logon process.
+To post testimonials.
+Request feedback.
+To enable user-to-user communications.
+To manage user accounts.
+To send administrative information to you.
+To protect our Services.
+To enforce our terms, conditions, and policies for business purposes, to comply with legal and regulatory requirements, or in connection with our contract.
+To respond to legal requests and prevent harm.
+For other business purposes.</p>
+    </section>
+
+    <section>
+      <h2>Will Your Information Be Shared with Anyone?</h2>
+      <p>We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations.
+We may process or share your data that we hold based on the following legal basis:
+Consent
+Legitimate Interests
+Performance of a Contract
+Legal Obligations
+Vital Interests</p>
+    </section>
+
+    <section>
+      <h2>How Long Do We Keep Your Information?</h2>
+      <p>We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy policy unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements).</p>
+    </section>
+
+    <section>
+      <h2>How Do We Keep Your Information Safe?</h2>
+      <p>We aim to protect your personal information through a system of organizational and technical security measures.</p>
+    </section>
+
+    <section>
+      <h2>Do We Collect Information from Minors?</h2>
+      <p>We do not knowingly solicit data from or market to children under 18 years of age.</p>
+    </section>
+
+    <section>
+      <h2>What Are Your Privacy Rights?</h2>
+      <p>You may review, change, or terminate your account at any time.</p>
+    </section>
+
+    <section>
+      <h2>Controls for Do-Not-Track Features</h2>
+      <p>Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected.</p>
+    </section>
+
+    <section>
+      <h2>Do California Residents Have Specific Privacy Rights?</h2>
+      <p>Yes, if you are a resident of California, you are granted specific rights regarding access to your personal information.</p>
+    </section>
+
+    <section>
+      <h2>Do We Make Updates to This Policy?</h2>
+      <p>Yes, we will update this policy as necessary to stay compliant with relevant laws.</p>
+    </section>
+
+    <section>
+      <h2>How Can You Contact Us About This Policy?</h2>
+      <p>If you have questions or comments about this policy, you may email us at admin@everlooms.com.</p>
+    </section>
+  </div>
+</div>
+
+{% render 'everlooms-policy-styles' %}
+
+{% schema %}
+{
+  "name": "Privacy policy content",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

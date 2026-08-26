@@ -1,0 +1,200 @@
+{%- comment -%}
+  Gender split-gate, mirroring the Everlooms React storefront's homepage
+  (src/components/layout/SplitGate.tsx) 1:1 — this section IS the homepage.
+{%- endcomment -%}
+
+<nav class="everlooms-split-gate" aria-label="Choose a shopping category">
+  <div class="everlooms-split-gate__frame">
+    <a href="{{ routes.root_url }}men" aria-label="Shop Men" class="everlooms-split-gate__panel everlooms-split-gate__panel--men">
+      <img
+        src="{{ 'everlooms-splitgate-men.webp' | asset_url }}"
+        alt=""
+        width="2816"
+        height="1536"
+        loading="eager"
+        class="everlooms-split-gate__img"
+      >
+      <div class="everlooms-split-gate__overlay"></div>
+    </a>
+    <a href="{{ routes.root_url }}women" aria-label="Shop Women" class="everlooms-split-gate__panel everlooms-split-gate__panel--women">
+      <img
+        src="{{ 'everlooms-splitgate-women.webp' | asset_url }}"
+        alt=""
+        width="1408"
+        height="768"
+        loading="eager"
+        class="everlooms-split-gate__img"
+      >
+      <div class="everlooms-split-gate__overlay"></div>
+    </a>
+
+    <div class="everlooms-split-gate__logo" aria-hidden="true">
+      <img
+        src="{{ 'everlooms-logo.svg' | asset_url }}"
+        alt=""
+        width="190"
+        height="190"
+      >
+    </div>
+  </div>
+
+  <div class="everlooms-split-gate__copyright">Copyright © 2026- EverLooms</div>
+</nav>
+
+{% stylesheet %}
+  .everlooms-split-gate {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 100svh;
+    background: #000000;
+    color: #ffffff;
+    padding: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-split-gate {
+      padding: 1.5rem 6vw;
+    }
+  }
+
+  .everlooms-split-gate__frame {
+    position: relative;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    min-height: 100svh;
+    max-width: 112.5rem;
+    border-radius: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-split-gate__frame {
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100svh - 64px);
+      border-radius: 10px;
+    }
+  }
+
+  .everlooms-split-gate__panel {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-height: 50svh;
+    animation: everlooms-split-gate-fade-in-down 1.25s ease both;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-split-gate__panel {
+      min-height: calc(100svh - 112px);
+    }
+  }
+
+  .everlooms-split-gate__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.8;
+    will-change: transform;
+    transition: transform 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .everlooms-split-gate__panel:hover .everlooms-split-gate__img {
+    transform: scale(1.1);
+  }
+
+  .everlooms-split-gate__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .everlooms-split-gate__logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 9.25rem;
+    width: 9.25rem;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+    animation: everlooms-split-gate-logo-fade-in-down 1.25s ease both;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-split-gate__logo {
+      height: 11.875rem;
+      width: 11.875rem;
+    }
+  }
+
+  .everlooms-split-gate__logo img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+  }
+
+  .everlooms-split-gate__copyright {
+    padding-block: 1.25rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #ffffff;
+  }
+
+  @keyframes everlooms-split-gate-fade-in-down {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes everlooms-split-gate-logo-fade-in-down {
+    from {
+      opacity: 0;
+      transform: translate3d(-50%, -150%, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(-50%, -50%, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .everlooms-split-gate__panel,
+    .everlooms-split-gate__logo {
+      animation: none;
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .everlooms-split-gate__logo {
+      transform: translate3d(-50%, -50%, 0);
+    }
+
+    .everlooms-split-gate__img,
+    .everlooms-split-gate__panel:hover .everlooms-split-gate__img {
+      transition: none;
+      transform: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Split gate",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

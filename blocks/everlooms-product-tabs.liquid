@@ -1,0 +1,222 @@
+{%- comment -%}
+  Description / Additional Information / Reviews tabs, mirroring the
+  Everlooms React storefront's ProductTabs.tsx. Rendered as a full-width
+  section block (not nested in the two-column product-details block) so it
+  can be centered independently of the left/right product columns, matching
+  React's `mt-14 border-t pt-8` + `mx-auto max-w-3xl` layout.
+
+  Description renders the raw product description (already contains a "Key
+  Features" list + spec table from the WooCommerce import). Additional
+  Information lists available size/colour option values. Reviews uses the
+  reviews.rating metafield (populated only if a review app is installed)
+  with an honest empty state.
+{%- endcomment -%}
+
+{% liquid
+  assign product = closest.product
+  assign rating_count = product.metafields.reviews.rating_count | default: 0
+  assign tabs_id = 'ProductTabs-' | append: block.id
+%}
+
+<div class="everlooms-product-tabs" id="{{ tabs_id }}" {{ block.shopify_attributes }}>
+  <div class="everlooms-product-tabs__nav" role="tablist">
+    <button type="button" class="everlooms-product-tabs__tab" role="tab" aria-selected="true" data-everlooms-tab="description">Description</button>
+    <button type="button" class="everlooms-product-tabs__tab" role="tab" aria-selected="false" data-everlooms-tab="additional">Additional information</button>
+    <button type="button" class="everlooms-product-tabs__tab" role="tab" aria-selected="false" data-everlooms-tab="reviews">Reviews ({{ rating_count }})</button>
+  </div>
+
+  <div class="everlooms-product-tabs__content">
+    <div class="everlooms-product-tabs__panel" data-everlooms-panel="description">
+      <div class="everlooms-product-tabs__description">
+        {{ product.description }}
+      </div>
+    </div>
+
+    <div class="everlooms-product-tabs__panel" data-everlooms-panel="additional" hidden>
+      {% liquid
+        assign size_option = null
+        assign color_option = null
+        for option in product.options_with_values
+          case option.name
+            when 'Size'
+              assign size_option = option
+            when 'Color', 'Colour'
+              assign color_option = option
+          endcase
+        endfor
+      %}
+      {% if size_option or color_option %}
+        <table class="everlooms-product-tabs__table">
+          <tbody>
+            {% if size_option %}
+              <tr>
+                <th scope="row">Size</th>
+                <td>{{ size_option.values | join: ', ' }}</td>
+              </tr>
+            {% endif %}
+            {% if color_option %}
+              <tr>
+                <th scope="row">Colour</th>
+                <td>{{ color_option.values | join: ', ' }}</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      {% else %}
+        <p class="everlooms-product-tabs__empty">No additional information available.</p>
+      {% endif %}
+    </div>
+
+    <div class="everlooms-product-tabs__panel" data-everlooms-panel="reviews" hidden>
+      <div class="everlooms-product-tabs__reviews-summary">
+        {% if rating_count > 0 %}
+          {% content_for 'block', type: 'review', id: 'everlooms-product-tabs-review', closest.product: product %}
+          <p class="everlooms-product-tabs__reviews-count">Based on {{ rating_count }} review{% if rating_count != 1 %}s{% endif %}.</p>
+        {% else %}
+          <div class="everlooms-product-tabs__reviews-icon" aria-hidden="true">✎</div>
+          <div class="everlooms-product-tabs__reviews-empty-title">No reviews yet</div>
+          <p class="everlooms-product-tabs__reviews-count">Be the first to share how this fits.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .everlooms-product-tabs {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid #DDD4CF;
+  }
+
+  .everlooms-product-tabs__nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    border-bottom: 1px solid #DDD4CF;
+  }
+
+  .everlooms-product-tabs__tab {
+    background: none;
+    border: none;
+    padding: 0.75rem 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #999999;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .everlooms-product-tabs__tab[aria-selected='true'] {
+    color: var(--color-foreground);
+    border-bottom-color: var(--color-primary-button-background);
+  }
+
+  .everlooms-product-tabs__content {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding-top: 2rem;
+  }
+
+  .everlooms-product-tabs__description h3 {
+    font-size: 1.125rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .everlooms-product-tabs__description ul {
+    margin: 0 0 1.5rem;
+    padding-left: 1.25rem;
+  }
+
+  .everlooms-product-tabs__description li {
+    font-size: 0.9375rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .everlooms-product-tabs__description table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .everlooms-product-tabs__description table td,
+  .everlooms-product-tabs__description table th {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #DDD4CF;
+  }
+
+  .everlooms-product-tabs__description table thead td,
+  .everlooms-product-tabs__description table td:first-child,
+  .everlooms-product-tabs__description table th {
+    font-weight: 600;
+  }
+
+  .everlooms-product-tabs__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    border: 1px solid #DDD4CF;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .everlooms-product-tabs__table tr {
+    border-bottom: 1px solid #DDD4CF;
+  }
+
+  .everlooms-product-tabs__table tr:last-child {
+    border-bottom: none;
+  }
+
+  .everlooms-product-tabs__table th,
+  .everlooms-product-tabs__table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  .everlooms-product-tabs__table th {
+    width: 33%;
+    background: #F7F7F7;
+    font-weight: 600;
+  }
+
+  .everlooms-product-tabs__empty {
+    color: #666666;
+    font-size: 0.9375rem;
+  }
+
+  .everlooms-product-tabs__reviews-summary {
+    border: 1px solid #DDD4CF;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .everlooms-product-tabs__reviews-icon {
+    font-size: 1.5rem;
+  }
+
+  .everlooms-product-tabs__reviews-empty-title {
+    margin-top: 0.4rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  .everlooms-product-tabs__reviews-count {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    color: #666666;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product tabs",
+  "tag": null,
+  "settings": []
+}
+{% endschema %}

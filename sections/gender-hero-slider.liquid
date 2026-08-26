@@ -1,0 +1,267 @@
+{%- comment -%}
+  Gendered hero slider, mirroring the Everlooms React storefront's GenderHeroSlider
+  (src/components/landing/GenderHeroSlider.tsx). Reuses Horizon's native
+  <slideshow-component> (assets/slideshow.js) for autoplay/pause/arrow/dot behavior
+  instead of hand-rolled carousel JS; only the slide markup and CSS are custom.
+
+  @param {string} variant - 'men' or 'women'
+{%- endcomment -%}
+
+{% liquid
+  assign variant = section.settings.variant
+  assign desktop_1 = 'everlooms-hero-' | append: variant | append: '-1.webp'
+  assign desktop_2 = 'everlooms-hero-' | append: variant | append: '-2.webp'
+  assign desktop_3 = 'everlooms-hero-' | append: variant | append: '-3.webp'
+  assign mobile_1 = 'everlooms-hero-' | append: variant | append: '-1-mobile.webp'
+  assign mobile_2 = 'everlooms-hero-' | append: variant | append: '-2-mobile.webp'
+  assign mobile_3 = 'everlooms-hero-' | append: variant | append: '-3-mobile.webp'
+%}
+
+<section class="everlooms-gender-hero everlooms-gender-hero--{{ variant }}">
+  {% capture slides %}
+    {% for pair in (1..3) %}
+      {% liquid
+        case pair
+          when 1
+            assign desktop_src = desktop_1
+            assign mobile_src = mobile_1
+          when 2
+            assign desktop_src = desktop_2
+            assign mobile_src = mobile_2
+          when 3
+            assign desktop_src = desktop_3
+            assign mobile_src = mobile_3
+        endcase
+        assign index0 = pair | minus: 1
+        assign slide_id = 'gender-hero-' | append: variant | append: '-' | append: pair
+      %}
+      {% capture slide_children %}
+        <img
+          class="everlooms-gender-hero__img everlooms-gender-hero__img--mobile"
+          src="{{ mobile_src | asset_url }}"
+          alt=""
+          width="1152"
+          height="1366"
+          loading="{% if pair == 1 %}eager{% else %}lazy{% endif %}"
+        >
+        <img
+          class="everlooms-gender-hero__img everlooms-gender-hero__img--desktop"
+          src="{{ desktop_src | asset_url }}"
+          alt=""
+          width="1672"
+          height="941"
+          loading="{% if pair == 1 %}eager{% else %}lazy{% endif %}"
+        >
+      {% endcapture %}
+      {% render 'slideshow-slide', index: index0, children: slide_children, slide_id: slide_id %}
+    {% endfor %}
+  {% endcapture %}
+
+  {% capture controls %}
+    {% render 'slideshow-controls', style: 'dots', item_count: 3, pagination_position: 'center' %}
+  {% endcapture %}
+
+  {% render 'slideshow',
+    ref: 'genderHero',
+    class: 'everlooms-gender-hero__slideshow',
+    slides: slides,
+    slide_count: 3,
+    autoplay: true,
+    autoplay_speed: 1.5,
+    infinite: true,
+    show_arrows: true,
+    icon_style: 'arrows_large',
+    arrows_position: 'center',
+    controls: controls
+  %}
+
+  <div class="everlooms-gender-hero__cta-wrap">
+    <a href="{{ routes.root_url }}collections/{{ variant }}" class="everlooms-gender-hero__cta">Shop Now</a>
+  </div>
+</section>
+
+{% stylesheet %}
+  .everlooms-gender-hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1728 / 2048;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-gender-hero {
+      aspect-ratio: 2048 / 1082;
+    }
+  }
+
+  /* Only the outer slideshow-component is pinned to fill the hero box.
+     The inner slideshow-container/slideshow-slides/slideshow-slide elements
+     must keep Horizon's native scroll-snap layout (overflow-x: scroll) —
+     forcing position: absolute on them breaks the carousel's paging entirely. */
+  .everlooms-gender-hero__slideshow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .everlooms-gender-hero__slideshow slideshow-container {
+    position: relative;
+    height: 100%;
+  }
+
+  .everlooms-gender-hero__slideshow slideshow-slides {
+    height: 100%;
+  }
+
+  .everlooms-gender-hero__slideshow slideshow-slide {
+    position: relative;
+    height: 100%;
+  }
+
+  .everlooms-gender-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .everlooms-gender-hero__img--desktop {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-gender-hero__img--mobile {
+      display: none;
+    }
+
+    .everlooms-gender-hero__img--desktop {
+      display: block;
+    }
+  }
+
+  .everlooms-gender-hero__cta-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .everlooms-gender-hero__cta {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem 3.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: #241e1c;
+    text-decoration: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    transition: background-color 200ms ease-out, transform 150ms ease-out;
+  }
+
+  .everlooms-gender-hero__cta:hover {
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  .everlooms-gender-hero__cta:active {
+    transform: scale(0.97);
+  }
+
+  /* Force always-visible, large black chevrons (React's hero arrows are not hover-only,
+     have no background/circle, and are noticeably larger than Horizon's defaults) */
+  .everlooms-gender-hero slideshow-arrows {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 20 !important;
+    pointer-events: none !important;
+  }
+
+  .everlooms-gender-hero .slideshow-control {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 3rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    color: #000000;
+    filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.55));
+    opacity: 1 !important;
+    animation: none !important;
+    z-index: 21 !important;
+    pointer-events: auto !important;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-gender-hero .slideshow-control {
+      width: 4rem;
+      height: 5rem;
+    }
+  }
+
+  .everlooms-gender-hero .slideshow-control svg {
+    width: 42px;
+    height: 42px;
+  }
+
+  .everlooms-gender-hero .slideshow-control:first-of-type {
+    left: 0.75rem;
+  }
+
+  .everlooms-gender-hero .slideshow-control:last-of-type {
+    right: 0.75rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-gender-hero .slideshow-control:first-of-type {
+      left: 1.25rem;
+    }
+
+    .everlooms-gender-hero .slideshow-control:last-of-type {
+      right: 1.25rem;
+    }
+  }
+
+  .everlooms-gender-hero .slideshow-control:hover {
+    opacity: 0.6 !important;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Gender hero slider",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "variant",
+      "label": "Variant",
+      "options": [
+        { "value": "men", "label": "Men" },
+        { "value": "women", "label": "Women" }
+      ],
+      "default": "men"
+    }
+  ]
+}
+{% endschema %}

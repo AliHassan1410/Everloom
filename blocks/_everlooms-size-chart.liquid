@@ -1,0 +1,271 @@
+{%- comment -%}
+  "Size Charts: ..." link + modal, mirroring the Everlooms React storefront's
+  SizeGuideModal (src/components/commerce/SizeGuide.tsx) — shows the compact chart
+  that matches the product's own gender + sub-category (boxer/vest for men, bra/
+  underwear for women), then a button through to the full /size-guide page.
+{%- endcomment -%}
+
+{% liquid
+  assign product = closest.product
+  assign gender_label = 'Men'
+  assign is_women = false
+  for collection in product.collections
+    if collection.handle == 'women'
+      assign gender_label = 'Women'
+      assign is_women = true
+    endif
+  endfor
+
+  assign category_label = product.type | default: gender_label
+  assign type_lower = product.type | default: '' | downcase
+  assign is_vest = false
+  assign is_bra = false
+  if type_lower contains 'vest'
+    assign is_vest = true
+  endif
+  if type_lower contains 'bra'
+    assign is_bra = true
+  endif
+
+  ##
+  # Client-approved chart exclusively for Everlooms SoftCore Daily Boxer Brief - every
+  # other men's boxer product uses the standard boxer table below (matching
+  # src/components/commerce/SizeGuide.tsx's productSlug check on the React storefront).
+  assign title_lower = product.title | default: '' | downcase
+  assign is_softcore_daily = false
+  if title_lower contains 'softcore daily'
+    assign is_softcore_daily = true
+  endif
+
+  assign chart_title = gender_label | append: ' ' | append: category_label
+  assign dialog_id = 'SizeChart-' | append: block.id
+%}
+
+<div class="everlooms-size-chart" {{ block.shopify_attributes }}>
+  <button type="button" class="everlooms-size-chart__trigger" data-everlooms-size-chart-open="{{ dialog_id }}">
+    <span class="svg-wrapper everlooms-size-chart__icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="7" width="18" height="10" rx="1"></rect>
+        <path d="M7 7v4M11 7v2M15 7v2M19 7v4"></path>
+      </svg>
+    </span>
+    <span>Size Charts: {{ chart_title }}</span>
+  </button>
+
+  <dialog id="{{ dialog_id }}" class="everlooms-size-chart__dialog">
+    <div class="everlooms-size-chart__dialog-inner">
+      <div class="everlooms-size-chart__dialog-header">
+        <h2 class="everlooms-size-chart__dialog-title">{{ chart_title }} Size Chart</h2>
+        <button type="button" class="everlooms-size-chart__close" data-everlooms-size-chart-close aria-label="Close">
+          {{ 'icon-close.svg' | inline_asset_content }}
+        </button>
+      </div>
+
+      {% if is_women %}
+        {% if is_bra %}
+          <div class="everlooms-size-chart__image">
+            <img
+              src="{{ 'everlooms-size-guide-bra-chart.webp' | asset_url }}"
+              alt="Everlooms bra size chart — band and cup sizing"
+              width="1254"
+              height="1254"
+              loading="lazy"
+            >
+          </div>
+          <div class="everlooms-size-chart__image everlooms-size-chart__image--stacked">
+            <img
+              src="{{ 'everlooms-size-guide-measure.webp' | asset_url }}"
+              alt="How to measure and calculate your Everlooms fit"
+              width="1241"
+              height="848"
+              loading="lazy"
+            >
+          </div>
+        {% else %}
+          <div class="everlooms-size-chart__image">
+            <img
+              src="{{ 'everlooms-size-guide-underwear-chart.webp' | asset_url }}"
+              alt="Everlooms underwear size chart"
+              width="1254"
+              height="1254"
+              loading="lazy"
+            >
+          </div>
+        {% endif %}
+      {% else %}
+        {% if is_vest %}
+          <table class="everlooms-size-chart__table">
+            <thead>
+              <tr><th>Size</th><th>Chest (in)</th><th>Length (approx., in)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>S</td><td>36-38</td><td>29</td></tr>
+              <tr><td>M</td><td>40-42</td><td>30</td></tr>
+              <tr><td>L</td><td>44-46</td><td>31</td></tr>
+              <tr><td>XL</td><td>48-50</td><td>32</td></tr>
+              <tr><td>2XL</td><td>52-54</td><td>33</td></tr>
+            </tbody>
+          </table>
+        {% elsif is_softcore_daily %}
+          <table class="everlooms-size-chart__table">
+            <thead>
+              <tr><th>Size</th><th>Inches</th><th>CM</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>S</td><td>26-27</td><td>65-70</td></tr>
+              <tr><td>M</td><td>28-30</td><td>71-75</td></tr>
+              <tr><td>L</td><td>31-33</td><td>76-85</td></tr>
+              <tr><td>XL</td><td>34-36</td><td>86-95</td></tr>
+              <tr><td>2XL</td><td>37-39</td><td>96-100</td></tr>
+              <tr><td>3XL</td><td>40-42</td><td>101-105</td></tr>
+              <tr><td>4XL</td><td>43-45</td><td>106-115</td></tr>
+            </tbody>
+          </table>
+        {% else %}
+          <table class="everlooms-size-chart__table">
+            <thead>
+              <tr><th>Size</th><th>Inches</th><th>CM</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>S</td><td>28-30</td><td>70-75</td></tr>
+              <tr><td>M</td><td>30-32</td><td>80-85</td></tr>
+              <tr><td>L</td><td>32-34</td><td>85-90</td></tr>
+              <tr><td>XL</td><td>36-38</td><td>95-100</td></tr>
+              <tr><td>2XL</td><td>40-42</td><td>100-105</td></tr>
+              <tr><td>3XL</td><td>42-44</td><td>105-110</td></tr>
+              <tr><td>4XL</td><td>44-46</td><td>110-115</td></tr>
+            </tbody>
+          </table>
+        {% endif %}
+      {% endif %}
+
+      <a href="{{ pages['size-guide'].url }}?tab={{ gender_label | downcase }}" class="button everlooms-size-chart__full-guide">
+        Full size guide &amp; how to measure
+      </a>
+    </div>
+  </dialog>
+</div>
+
+{% stylesheet %}
+  .everlooms-size-chart__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.8125rem;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    color: var(--color-foreground);
+  }
+
+  .everlooms-size-chart__icon svg {
+    display: block;
+  }
+
+  .everlooms-size-chart__dialog {
+    border: none;
+    border-radius: 16px;
+    padding: 0;
+    max-width: 28.75rem;
+    max-height: 85vh;
+    width: calc(100% - 2rem);
+  }
+
+  @media screen and (min-width: 640px) {
+    .everlooms-size-chart__dialog {
+      max-width: 37.5rem;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .everlooms-size-chart__dialog {
+      max-width: 51.25rem;
+    }
+  }
+
+  .everlooms-size-chart__dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .everlooms-size-chart__dialog-inner {
+    padding: 1.75rem;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .everlooms-size-chart__dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .everlooms-size-chart__dialog-title {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .everlooms-size-chart__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+
+  .everlooms-size-chart__close svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .everlooms-size-chart__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .everlooms-size-chart__table th,
+  .everlooms-size-chart__table td {
+    border: 1px solid #DDD4CF;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  .everlooms-size-chart__table th {
+    background: #F7F7F7;
+    font-weight: 600;
+  }
+
+  .everlooms-size-chart__image {
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid #DDD4CF;
+  }
+
+  .everlooms-size-chart__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .everlooms-size-chart__image--stacked {
+    margin-top: 0.75rem;
+  }
+
+  .everlooms-size-chart__full-guide {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 1.25rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Size chart link",
+  "tag": null,
+  "settings": []
+}
+{% endschema %}

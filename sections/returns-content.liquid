@@ -1,0 +1,36 @@
+{%- comment -%}
+  Hardcoded Returns & Exchanges content, mirroring the Everlooms React storefront's
+  /info/returns page (src/lib/content.ts "returns" entry) 1:1.
+{%- endcomment -%}
+
+<div class="everlooms-policy-page">
+  <nav class="everlooms-policy-breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="everlooms-policy-breadcrumb__sep">/</span>
+    <span>Returns &amp; exchanges</span>
+  </nav>
+
+  <h1 class="everlooms-policy-title">Returns &amp; exchanges</h1>
+  <p class="everlooms-policy-intro">Size exchanges and our approach to returns.</p>
+
+  <p class="everlooms-policy-confirmation-notice">
+    <strong>Content requires confirmation</strong> — the wording on this page is a neutral placeholder. Final, client-approved copy must be supplied before launch.
+  </p>
+
+  <div class="everlooms-policy-sections">
+    <section>
+      <h2>Size exchanges</h2>
+      <p>We offer size exchange on unworn items. For hygiene reasons, eligibility for intimate items and sale items is being confirmed and will be stated here before launch.</p>
+    </section>
+  </div>
+</div>
+
+{% render 'everlooms-policy-styles' %}
+
+{% schema %}
+{
+  "name": "Returns content",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

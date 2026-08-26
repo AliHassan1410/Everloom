@@ -1,0 +1,73 @@
+{%- comment -%}
+  Hardcoded Refund Policy content, mirroring the Everlooms React storefront's
+  /info/refund page (src/lib/content.ts "refund" entry) 1:1. Not merchant-editable
+  by design — this is the same fixed copy as the React site, not admin-authored text.
+{%- endcomment -%}
+
+<div class="everlooms-policy-page">
+  <nav class="everlooms-policy-breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="everlooms-policy-breadcrumb__sep">/</span>
+    <span>Refund Policy</span>
+  </nav>
+
+  <h1 class="everlooms-policy-title">Refund Policy</h1>
+  <p class="everlooms-policy-intro">Thank you for shopping with Everlooms! We hope you're delighted with your purchase. However, if you are not completely satisfied, we're here to help. Please review our refund policy below.</p>
+
+  <div class="everlooms-policy-sections">
+    <section>
+      <h2>Return Eligibility</h2>
+      <p>Items must be returned within 30 days of receipt.
+Garments must be unworn, unwashed, and in their original condition with all tags and packaging intact.
+Certain items, such as intimate apparel and swimwear, are non-returnable for hygiene reasons. Please check the product description for specific details.
+Items purchased during clearance or promotional sales are final and not eligible for refunds.</p>
+    </section>
+
+    <section>
+      <h2>How to Return</h2>
+      <p>To initiate a return, please contact our customer service team via WhatsApp at +92 330 4114118.
+Provide your order number and reason for return.
+We will provide you with a return authorization and instructions for sending the item back to us.</p>
+    </section>
+
+    <section>
+      <h2>Return Shipping</h2>
+      <p>You are responsible for the return shipping costs unless the item was received damaged or incorrect.
+We recommend using a trackable shipping service or purchasing shipping insurance, as we cannot guarantee that we will receive your returned item.</p>
+    </section>
+
+    <section>
+      <h2>Refund Process</h2>
+      <p>Once we receive your returned item, we will inspect it to ensure it meets our return criteria.
+Refunds will be processed to your original method of payment within 7-10 business days from receipt of the returned item.
+Shipping charges are non-refundable.</p>
+    </section>
+
+    <section>
+      <h2>Exchanges</h2>
+      <p>If you would like to exchange an item for a different size or color, please initiate a return and place a new order. The return policy for the exchanged item will be the same as for refunds.</p>
+    </section>
+
+    <section>
+      <h2>Damaged or Incorrect Items</h2>
+      <p>If you receive a damaged or incorrect item, please contact us immediately at admin@everlooms.com with your order number and a photo of the item. We will arrange for a replacement or a full refund, including return shipping costs.</p>
+    </section>
+
+    <section>
+      <h2>Contact Us</h2>
+      <p>For any questions regarding our refund policy, please reach out to our customer service team at admin@everlooms.com or +92 330 4114118.
+
+Thank you for shopping with Everlooms!</p>
+    </section>
+  </div>
+</div>
+
+{% render 'everlooms-policy-styles' %}
+
+{% schema %}
+{
+  "name": "Refund policy content",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

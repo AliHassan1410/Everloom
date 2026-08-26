@@ -1,0 +1,557 @@
+/*
+ * Everlooms brand overrides on top of Horizon's default theme CSS.
+ * Anything expressible through theme settings lives in config/settings_data.json;
+ * this file covers only what Horizon's settings UI cannot reach:
+ * exact webfonts, focus ring, product-card hover motion, and product-card
+ * border/aspect-ratio (set per block-instance in Horizon, not as a global setting).
+ */
+
+.everlooms-view-more-hidden {
+  display: none !important;
+}
+
+.everlooms-view-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Product filters (Horizon's native facets, real collection.filters data,
+   restyled to match the reference design: white background, uppercase
+   labels, thin #e5e5e5 dividers, minimal chevron, no card/shadow styling
+   on individual rows - scoped to the #filters-drawer so it doesn't affect
+   the (hidden) inline horizontal/vertical filter bar elsewhere). */
+#filters-drawer .theme-drawer__dialog {
+  background: #ffffff;
+}
+
+#filters-drawer .facets__panel {
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  border-radius: 0;
+}
+
+#filters-drawer .facets__summary {
+  padding-block: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #241e1c;
+  border: none;
+  border-radius: 0;
+}
+
+#filters-drawer .facets__label {
+  text-transform: uppercase;
+}
+
+#filters-drawer .icon-caret svg {
+  width: 12px;
+  height: 12px;
+}
+
+.everlooms-discount-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-block: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.facets__panel-content,
+.facets-drawer,
+#filters-drawer {
+  --style-border-radius-popover: 8px;
+}
+
+/* Keep the product grid full-width while the filters drawer is open.
+   Horizon's theme-drawer.js "squeezes" .page-wrapper by adding a
+   margin-right equal to the drawer's width (400px) on wide viewports,
+   which crosses a container-query breakpoint in product-grid.liquid and
+   collapses the grid from 4 columns to 2. Overlaying the drawer on top
+   instead (no squeeze) keeps the page width - and product grid - the same
+   regardless of whether the drawer is open. */
+body:has(#filters-drawer[open]) .page-wrapper.page-wrapper--drawer-open {
+  margin-right: 0 !important;
+}
+
+/* Filters drawer: opens from the left instead of Horizon's default right
+   side. The base .theme-drawer__dialog rules (theme-drawer-styles.liquid)
+   position everything via `right`, animated with `right`-based keyframes -
+   mirrored here with `left` instead, since setting both left and right on a
+   fixed-width fixed-position element at once over-constrains the box. */
+#filters-drawer .theme-drawer__dialog {
+  right: auto !important;
+  left: calc(-1 * var(--theme-drawer-width, var(--sidebar-width))) !important;
+  border-left: none;
+  border-right: var(--style-border-drawer);
+  /* Above the sticky header (--layer-menu-drawer: 18) - the drawer's own
+     default z-index uses --layer-sticky (8), which put the header on top
+     of the drawer's upper portion, covering the first accordion item. */
+  z-index: var(--layer-temporary) !important;
+}
+
+#filters-drawer .theme-drawer__dialog[open] {
+  left: 0 !important;
+}
+
+#filters-drawer .theme-drawer__dialog--opening,
+#filters-drawer .theme-drawer__dialog--opening-inline-start {
+  animation-name: everlooms-drawer-slide-in-left !important;
+}
+
+#filters-drawer .theme-drawer__dialog--closing {
+  animation-name: everlooms-drawer-slide-out-left !important;
+}
+
+@keyframes everlooms-drawer-slide-in-left {
+  from {
+    left: calc(-1 * var(--theme-drawer-width, var(--sidebar-width)));
+  }
+}
+
+@keyframes everlooms-drawer-slide-out-left {
+  to {
+    left: calc(-1 * var(--theme-drawer-width, var(--sidebar-width)));
+  }
+}
+
+/* Color swatches inside filters, matching ColorDots' circular ring treatment */
+.swatch--filter {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
+}
+
+/* Collection filters: drawer-only on every screen size, matching React's
+   ShopFilters ("Filters" button -> white sidebar), instead of Horizon's
+   default of showing the horizontal/vertical filter row inline on desktop
+   and only using the drawer+toggle button on mobile (< 750px). Scoped with
+   :not(#filters-drawer) because the drawer itself also carries the
+   .facets-block-wrapper class - the unscoped version was hiding the drawer
+   permanently too, even while "open", since !important overrode whatever
+   mechanism <theme-drawer> uses to show itself. */
+.facets-block-wrapper:not(#filters-drawer) {
+  display: none !important;
+}
+
+/* Force the "Filter" trigger onto its own full-width row above the product
+   grid, instead of sharing a row with the first products - .collection-wrapper
+   is a CSS grid, and without an explicit column span .facets-toggle only
+   occupies a single implicit column/row alongside the grid's first items. */
+.facets-toggle {
+  display: flex !important;
+  grid-column: 1 / -1 !important;
+}
+
+.facets-toggle__button {
+  display: inline-flex !important;
+}
+
+.variant-option--swatches input:checked + label .swatch--filter,
+.variant-option--swatches input:checked ~ .swatch--filter {
+  outline: 2px solid #2d6b7d;
+  outline-offset: 1px;
+}
+
+/* Size pills: teal fill when selected, matching React's Chip active state */
+.facets__pill-input:checked + .facets__pill-label,
+input:checked + .facets__pill-label {
+  background: #2d6b7d;
+  border-color: #2d6b7d;
+  color: #ffffff;
+}
+
+.facets__pill-label {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Price filter inputs */
+.price-facet__input {
+  border-radius: 8px;
+  border-color: #ddd4cf;
+}
+
+.price-facet__input:focus {
+  border-color: #2d6b7d;
+}
+
+/* Active filter chips + "Clear all" */
+.active-facets .facet-remove,
+.active-facets__button {
+  border-radius: 9999px;
+  border-color: #ead8dd;
+  background: #ead8dd;
+  color: #1a3e48;
+  font-weight: 600;
+}
+
+.facets__clear-all,
+.facets__reset {
+  color: #2d6b7d;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.facets input:checked {
+  accent-color: #2d6b7d;
+}
+
+:root {
+  --font-heading--family: 'IBM Plex Mono', monospace;
+  --font-accent--family: 'IBM Plex Mono', monospace;
+  --font-subheading--family: 'Roboto Serif', Georgia, serif;
+  --font-body--family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --color-error: #a53a3a;
+  --color-success: #34705a;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px #ead8dd !important;
+  border-radius: 4px;
+}
+
+/* Product card: square image, teal border, lift + scale hover (mirrors React's cardHover) */
+.card-gallery {
+  --gallery-aspect-ratio: 1 !important;
+}
+
+.product-card__content {
+  --border-width: 1px !important;
+  --border-style: solid !important;
+  --border-color: #2d6b7d !important;
+  --border-radius: 0px !important;
+  background-color: #ffffff;
+}
+
+.product-card {
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+
+.product-card:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(36, 30, 28, 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Homepage hero ("Browse our latest products"): taller than full viewport height */
+#Hero-hero_jVaWmY {
+  --hero-min-height: 150svh;
+}
+
+/* Header: match React header's height, icon sizing/spacing, nav typography, dropdown look */
+.header-section:has(#header-component) {
+  --header-row-height: 70px;
+}
+
+@media screen and (min-width: 750px) {
+  .header-section:has(#header-component) {
+    --header-row-height: 95px;
+  }
+}
+
+.header__row--top .header__columns {
+  min-height: var(--header-row-height);
+}
+
+/* Icon action buttons: 44px tap target, 22px icon, soft circular hover tint */
+.header-actions__action,
+.dropdown-localization__button,
+shopify-account:not(:defined) {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  transition: background-color 150ms ease-out;
+}
+
+.header-actions__action:hover {
+  background-color: rgb(0 0 0 / 0.05);
+}
+
+.header-actions__action .svg-wrapper svg,
+.header-actions__cart-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+header-actions {
+  gap: 2px;
+}
+
+/* Mobile header layout: logo pinned to the far left, then search/account/
+   wishlist/cart/menu icons clustered together at the far right edge with
+   even spacing between every icon - matches the reference layout exactly.
+   Horizon's mobile header is normally a 5-column grid (leftA leftB center
+   rightA rightB) with the logo centered and icons split across two narrow
+   tracks; that's dropped entirely here in favor of a single flex row so
+   `order` + `gap` can give every icon the exact same spacing regardless of
+   which native grid-area it used to belong to. */
+@media screen and (max-width: 749px) {
+  #header-component[data-menu-style='drawer'] .header__columns {
+    display: flex !important;
+    align-items: center;
+    gap: 20px;
+  }
+
+  #header-component[data-menu-style='drawer'] .header-logo {
+    order: 1;
+  }
+
+  #header-component[data-menu-style='drawer'] .search-action {
+    order: 2;
+    margin-inline-start: auto;
+    margin-inline-end: 35px;
+  }
+
+  #header-component[data-menu-style='drawer'] header-actions {
+    order: 3;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* order only affects direct flex children - the hamburger button
+     (.header__icon--menu) is nested inside <header-drawer>, which is the
+     actual direct child of .header__columns, so the order must go there
+     instead (targeting the button itself was a no-op, leaving it stuck at
+     the default order: 0 - first in the row, ahead of the logo). */
+  #header-component[data-menu-style='drawer'] header-drawer {
+    order: 4;
+  }
+
+  .header-actions__action,
+  .dropdown-localization__button,
+  shopify-account:not(:defined) {
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .header-actions__action .svg-wrapper svg,
+  .header-actions__cart-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* Mobile menu drawer (Home/Men/Women/.../My Account) - phone only. Everything
+   here is scoped to max-width: 749px on purpose: the theme's own drawer can
+   also trigger on a touch-capable laptop/desktop at full width (see
+   assets/utilities.js, which sets data-menu-style="drawer" for
+   isTouchDevice() regardless of viewport), so gating purely on that
+   attribute would leak this styling onto desktop/laptop. Colors are
+   hardcoded here (rather than via the block's background_color setting)
+   for the same reason - that setting isn't viewport-scoped and would apply
+   any time the drawer renders, touch-desktop included. */
+@media screen and (max-width: 749px) {
+  .menu-drawer {
+    width: 75vw !important;
+    max-width: 75vw !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .menu-drawer__menu-item-text,
+  .menu-drawer__menu-item--mainlist,
+  .menu-drawer__menu-item--child,
+  .menu-drawer__close-button {
+    color: #ffffff !important;
+  }
+
+  .menu-drawer__list-item--divider,
+  .menu-drawer__menu-container--divider {
+    border-block-end-color: rgb(255 255 255 / 0.15) !important;
+  }
+
+  .menu-drawer > .menu-drawer__close-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+  }
+
+  .menu-drawer__navigation {
+    margin-top: 3.5rem;
+  }
+
+  .menu-drawer__menu-item--mainlist {
+    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+  }
+
+  .menu-drawer__menu-item--child {
+    opacity: 0.7;
+    padding-inline-start: 0.25rem;
+    justify-content: flex-start !important;
+    font-size: 0.7rem !important;
+  }
+
+  .menu-drawer__menu-item--child::before {
+    content: '\00B7';
+    margin-inline-end: 0.6rem;
+  }
+}
+
+/* Nav links: uppercase monospace, subtle hover underline, matches React's NavDropdown trigger.
+   React applies 25px padding on *each side* of every link (px-live-nav-x),
+   so the effective gap between adjacent items is 50px, not 25px. */
+.header-menu .menu-list {
+  --menu-horizontal-gap: 50px;
+}
+
+.menu-list__link {
+  font-family: var(--font-heading--family);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: normal;
+  color: rgb(0 0 0 / 0.7);
+  text-underline-offset: 4px;
+  transition: color 150ms ease-out;
+}
+
+.menu-list__link:hover {
+  color: #303030;
+  text-decoration: underline;
+}
+
+/* Dropdown submenu: Horizon's native mega-menu (full-bleed grid, JS-measured
+   heights, negative margins, and its <overflow-list> host's declarative
+   Shadow DOM/slot reflow) proved too deeply coupled to reliably reskin via
+   CSS overrides, or even to safely insert real child elements into - both a
+   ::after pseudo-element and a real inserted <span> chevron kept getting
+   silently dropped by the native component. everlooms-nav-dropdown.js now
+   builds a fully independent overlay (chevron + panel) appended to <body>
+   and positioned via getBoundingClientRect(), touching nothing inside the
+   native menu markup except reading its link text/hrefs and toggling the
+   native panel's own display off. */
+.menu-list__submenu {
+  display: none !important;
+}
+
+.everlooms-dropdown {
+  display: none;
+  position: fixed;
+  z-index: 500;
+  width: 220px;
+  padding: 8px;
+  background-color: #ffffff;
+  border: 1px solid #e7dfd9;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(36, 30, 28, 0.12);
+  flex-direction: column;
+  gap: 2px;
+}
+
+.everlooms-dropdown--open {
+  display: flex;
+}
+
+.everlooms-dropdown__link {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #666666;
+  text-decoration: none;
+}
+
+.everlooms-dropdown__link:hover {
+  background-color: #f7f7f7;
+  color: #111111;
+}
+
+.everlooms-dropdown__link--bold {
+  font-weight: 600;
+  color: #111111;
+}
+
+/* Dropdown chevron: pure-CSS triangle next to MEN / WOMEN / MY ACCOUNT,
+   matching React's ChevronDown trigger icon. Positioned as an independent
+   overlay (see comment above) rather than inserted into the native trigger. */
+.everlooms-chevron-overlay {
+  position: fixed;
+  z-index: 500;
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #303030;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Footer: matches React's black footer (My Account / Quick View / Support columns + brand strip) */
+.footer-content a {
+  color: #888888;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 150ms ease-out;
+}
+
+.footer-content a:hover {
+  color: #ffffff;
+}
+
+
+.footer-content .logo-block__image {
+  margin-inline: auto;
+}
+
+/* Product page: "Clear" link injected next to the size selector's legend
+   by everlooms-variant-clear.js */
+variant-picker fieldset[data-option-id] > legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.everlooms-variant-clear {
+  font-size: 0.8125rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: #666666;
+}
+
+.everlooms-variant-clear:hover {
+  color: var(--color-foreground);
+}
+
+/* Product page: hide the native "Buy it now" accelerated-checkout button —
+   React's PDP only has a single Add to cart action */
+.accelerated-checkout-block {
+  display: none !important;
+}
+
+/* Product page: plain "In stock" text, no status dot (matches React's PDP) */
+.product-inventory__icon {
+  display: none;
+}
+
+/* Price: compare-at above, sale price below (stacked), matching React's price block */
+[ref='priceContainer'] {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+[ref='priceContainer'] .price-item--regular.compare-at-price {
+  font-size: 0.875em;
+  opacity: 0.6;
+}
+

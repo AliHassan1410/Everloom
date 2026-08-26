@@ -1,0 +1,61 @@
+{%- comment -%}
+  Renders "CATEGORIES: MEN, MODAL VEST" on the product page, mirroring the
+  Everlooms React storefront's ProductPurchase.tsx categories line. Gender is
+  derived from collection membership (men/women), the specific category from
+  product.type (set from the WooCommerce category during import).
+{%- endcomment -%}
+
+{% liquid
+  assign product = closest.product
+  assign gender = ''
+  for collection in product.collections
+    if collection.handle == 'men'
+      assign gender = 'MEN'
+    elsif collection.handle == 'women'
+      assign gender = 'WOMEN'
+    endif
+  endfor
+
+  assign parts = ''
+  if gender != ''
+    assign parts = gender
+  endif
+  if product.type != blank
+    assign type_upper = product.type | upcase
+    if parts != ''
+      assign parts = parts | append: ', ' | append: type_upper
+    else
+      assign parts = type_upper
+    endif
+  endif
+%}
+
+{% unless parts == '' %}
+  <p class="everlooms-product-categories" {{ block.shopify_attributes }}>
+    <span class="everlooms-product-categories__label">Categories:</span>
+    {{ parts }}
+  </p>
+{% endunless %}
+
+{% stylesheet %}
+  .everlooms-product-categories {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: #666666;
+  }
+
+  .everlooms-product-categories__label {
+    font-weight: 600;
+    color: var(--color-foreground);
+    text-transform: uppercase;
+    margin-right: 0.25em;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Categories line",
+  "tag": null,
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,258 @@
+{%- comment -%}
+  Shared styling for hardcoded marketing pages (About, Contact) that mirror
+  the Everlooms React storefront's dedicated /about and /contact pages 1:1.
+{%- endcomment -%}
+
+{% stylesheet %}
+  .everlooms-hero-banner {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 640px) {
+    .everlooms-hero-banner {
+      height: 420px;
+    }
+  }
+
+  .everlooms-hero-banner img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .everlooms-hero-banner__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .everlooms-hero-banner__heading {
+    font-family: var(--font-heading--family);
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 640px) {
+    .everlooms-hero-banner__heading {
+      font-size: 3rem;
+    }
+  }
+
+  .everlooms-marketing-page {
+    max-width: 80rem;
+    margin-inline: auto;
+    padding: 3.5rem 1rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-marketing-page {
+      padding: 5rem 2rem;
+    }
+  }
+
+  .everlooms-divider-bar {
+    height: 2px;
+    width: 2.5rem;
+    background: #241e1c;
+  }
+
+  .everlooms-divider-bar--center {
+    margin-inline: auto;
+  }
+
+  /* About: two-column "Who We Are" */
+  .everlooms-about-grid {
+    display: grid;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .everlooms-about-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .everlooms-about-grid h2 {
+    margin-top: 1.25rem;
+    font-family: var(--font-heading--family);
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #241e1c;
+  }
+
+  @media screen and (min-width: 640px) {
+    .everlooms-about-grid h2 {
+      font-size: 2.25rem;
+    }
+  }
+
+  .everlooms-about-grid p {
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: #6d625d;
+  }
+
+  @media screen and (min-width: 640px) {
+    .everlooms-about-grid p {
+      font-size: 1rem;
+    }
+  }
+
+  .everlooms-about-grid__image {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .everlooms-about-grid__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .everlooms-closing {
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  .everlooms-closing__eyebrow {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #241e1c;
+    margin: 0;
+  }
+
+  .everlooms-closing__heading {
+    margin-top: 0.25rem;
+    font-family: var(--font-heading--family);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #241e1c;
+  }
+
+  @media screen and (min-width: 640px) {
+    .everlooms-closing__heading {
+      font-size: 1.875rem;
+    }
+  }
+
+  .everlooms-closing .button {
+    margin-top: 1.5rem;
+  }
+
+  /* Contact page */
+  .everlooms-contact-intro {
+    text-align: center;
+  }
+
+  .everlooms-contact-intro__eyebrow {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #241e1c;
+    margin: 0;
+  }
+
+  .everlooms-contact-intro__heading {
+    margin-top: 0.25rem;
+    font-family: var(--font-heading--family);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #241e1c;
+  }
+
+  @media screen and (min-width: 640px) {
+    .everlooms-contact-intro__heading {
+      font-size: 1.875rem;
+    }
+  }
+
+  .everlooms-contact-intro .everlooms-divider-bar {
+    margin-top: 0.75rem;
+  }
+
+  .everlooms-contact-topics {
+    margin-top: 2.5rem;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (min-width: 640px) {
+    .everlooms-contact-topics {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .everlooms-contact-topics {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .everlooms-contact-topic {
+    border-radius: 12px;
+    border: 1px solid #e7dfd9;
+    background: #ffffff;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(36, 30, 28, 0.12);
+  }
+
+  .everlooms-contact-topic h3 {
+    font-family: var(--font-heading--family);
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #241e1c;
+    margin: 0;
+  }
+
+  .everlooms-contact-topic p {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: #6d625d;
+  }
+
+  .everlooms-contact-details {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .everlooms-contact-details__phone {
+    font-family: var(--font-heading--family);
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #241e1c;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 640px) {
+    .everlooms-contact-details__phone {
+      font-size: 1.5rem;
+    }
+  }
+
+  .everlooms-contact-details__address {
+    margin-top: 0.5rem;
+    font-family: var(--font-heading--family);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #241e1c;
+  }
+{% endstylesheet %}

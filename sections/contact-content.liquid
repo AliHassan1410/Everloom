@@ -1,0 +1,61 @@
+{%- comment -%}
+  Hardcoded Contact Us content, mirroring the Everlooms React storefront's
+  /contact page (src/app/(shop)/contact/page.tsx + src/content/contact.json) 1:1.
+  No form is rendered here because the live React page's ContactPageForm is
+  currently commented out — this matches what's actually live, not the dead code.
+{%- endcomment -%}
+
+<div class="everlooms-hero-banner">
+  <img
+    src="{{ 'everlooms-contact-banner.webp' | asset_url }}"
+    alt=""
+    width="1920"
+    height="1100"
+    loading="eager"
+  >
+  <div class="everlooms-hero-banner__overlay">
+    <h1 class="everlooms-hero-banner__heading">Contact Us</h1>
+  </div>
+</div>
+
+<div class="everlooms-marketing-page">
+  <div class="everlooms-contact-intro">
+    <p class="everlooms-contact-intro__eyebrow">Have any queries?</p>
+    <h2 class="everlooms-contact-intro__heading">We're here to help.</h2>
+    <div class="everlooms-divider-bar everlooms-divider-bar--center" aria-hidden="true"></div>
+  </div>
+
+  <div class="everlooms-contact-topics">
+    <div class="everlooms-contact-topic">
+      <h3>Sales</h3>
+      <p>Helping you find the perfect style, every time. Our team is here to guide you through sizes, fabrics, and the latest Everlooms collections.</p>
+    </div>
+    <div class="everlooms-contact-topic">
+      <h3>Complaints</h3>
+      <p>We're here to make things right. If something didn't meet your expectations, let us know — your satisfaction matters to us.</p>
+    </div>
+    <div class="everlooms-contact-topic">
+      <h3>Returns</h3>
+      <p>Easy and hassle-free returns. Need to exchange or return an item? We've made the process simple and smooth for you.</p>
+    </div>
+    <div class="everlooms-contact-topic">
+      <h3>Marketing</h3>
+      <p>Let's collaborate and grow together. For partnerships, promotions, or media inquiries, our marketing team would love to connect.</p>
+    </div>
+  </div>
+
+  <div class="everlooms-contact-details">
+    <p class="everlooms-contact-details__phone">+92 330 4114118</p>
+    <p class="everlooms-contact-details__address">{{ shop.address.summary | default: "Pakistan" }}</p>
+  </div>
+</div>
+
+{% render 'everlooms-marketing-page-styles' %}
+
+{% schema %}
+{
+  "name": "Contact Us content",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,37 @@
+{%- comment -%}
+  Hardcoded Shipping & Delivery content, mirroring the Everlooms React storefront's
+  /info/shipping page (src/lib/content.ts "shipping" entry) 1:1.
+{%- endcomment -%}
+
+<div class="everlooms-policy-page">
+  <nav class="everlooms-policy-breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="everlooms-policy-breadcrumb__sep">/</span>
+    <span>Shipping &amp; delivery</span>
+  </nav>
+
+  <h1 class="everlooms-policy-title">Shipping &amp; delivery</h1>
+  <p class="everlooms-policy-intro">How and where we ship.</p>
+
+  <div class="everlooms-policy-sections">
+    <section>
+      <h2>Delivery across Pakistan</h2>
+      <p>We deliver nationwide in discreet, plain packaging.</p>
+    </section>
+
+    <section>
+      <h2>Delivery charges</h2>
+      <p>Flat Rs. 300 nationwide.</p>
+    </section>
+  </div>
+</div>
+
+{% render 'everlooms-policy-styles' %}
+
+{% schema %}
+{
+  "name": "Shipping content",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

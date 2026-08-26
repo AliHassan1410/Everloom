@@ -1,0 +1,340 @@
+{%- comment -%}
+  Hardcoded Size Guide content, mirroring the Everlooms React storefront's /size-guide
+  page (src/components/commerce/SizeGuide.tsx SizeGuideContent) 1:1 — Men's/Women's tabs,
+  the same boxer/vest tables and bra/underwear chart images, the "Common fit problems"
+  grid (women tab only), and the WhatsApp CTA.
+{%- endcomment -%}
+
+<div class="everlooms-policy-page everlooms-size-guide" data-size-guide>
+  <nav class="everlooms-policy-breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="everlooms-policy-breadcrumb__sep">/</span>
+    <span>Size guide</span>
+  </nav>
+
+  <h1 class="everlooms-policy-title">Find your fit</h1>
+  <p class="everlooms-policy-intro">Measure in two minutes. Between sizes? Most customers size up for everyday comfort, or message us on WhatsApp for a recommendation.</p>
+
+  <div class="everlooms-size-guide-tabs" role="tablist" aria-label="Size charts">
+    <button type="button" role="tab" class="everlooms-size-guide-tab" data-size-guide-tab="men" aria-selected="false">Men's</button>
+    <button type="button" role="tab" class="everlooms-size-guide-tab" data-size-guide-tab="women" aria-selected="true">Women's</button>
+  </div>
+
+  <div data-size-guide-panel="women">
+    <div class="everlooms-size-guide-stack">
+      <section aria-labelledby="bra-size-chart">
+        <h2 id="bra-size-chart" class="everlooms-size-guide-heading">Bra size chart</h2>
+        <div class="everlooms-size-guide-stack everlooms-size-guide-stack--tight">
+          <div class="everlooms-size-guide-image">
+            <img
+              src="{{ 'everlooms-size-guide-bra-chart.webp' | asset_url }}"
+              alt="Everlooms bra size chart — band and cup sizing"
+              width="1254"
+              height="1254"
+              loading="lazy"
+            >
+          </div>
+          <div class="everlooms-size-guide-image">
+            <img
+              src="{{ 'everlooms-size-guide-measure.webp' | asset_url }}"
+              alt="How to measure and calculate your Everlooms fit"
+              width="1241"
+              height="848"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="underwear-size-chart">
+        <h2 id="underwear-size-chart" class="everlooms-size-guide-heading">Underwear size chart</h2>
+        <div class="everlooms-size-guide-image">
+          <img
+            src="{{ 'everlooms-size-guide-underwear-chart.webp' | asset_url }}"
+            alt="Everlooms underwear size chart"
+            width="1254"
+            height="1254"
+            loading="lazy"
+          >
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div data-size-guide-panel="men" hidden>
+    <div class="everlooms-size-guide-stack">
+      <section aria-labelledby="men-boxers-size">
+        <h2 id="men-boxers-size" class="everlooms-size-guide-heading">Men boxers</h2>
+        <div class="everlooms-size-guide-table-wrap">
+          <table class="everlooms-size-guide-table">
+            <caption class="visually-hidden">Men boxers size guide</caption>
+            <thead>
+              <tr>
+                <th scope="col">Size</th>
+                <th scope="col">Inches</th>
+                <th scope="col">CM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>S</td><td>28-30</td><td>70-75</td></tr>
+              <tr><td>M</td><td>30-32</td><td>80-85</td></tr>
+              <tr><td>L</td><td>32-34</td><td>85-90</td></tr>
+              <tr><td>XL</td><td>36-38</td><td>95-100</td></tr>
+              <tr><td>2XL</td><td>40-42</td><td>100-105</td></tr>
+              <tr><td>3XL</td><td>42-44</td><td>105-110</td></tr>
+              <tr><td>4XL</td><td>44-46</td><td>110-115</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="men-vests-size">
+        <h2 id="men-vests-size" class="everlooms-size-guide-heading">Men vests</h2>
+        <div class="everlooms-size-guide-table-wrap">
+          <table class="everlooms-size-guide-table">
+            <caption class="visually-hidden">Men vests size guide</caption>
+            <thead>
+              <tr>
+                <th scope="col">Size</th>
+                <th scope="col">Chest (in)</th>
+                <th scope="col">Length (approx., in)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>S</td><td>36-38</td><td>29</td></tr>
+              <tr><td>M</td><td>40-42</td><td>30</td></tr>
+              <tr><td>L</td><td>44-46</td><td>31</td></tr>
+              <tr><td>XL</td><td>48-50</td><td>32</td></tr>
+              <tr><td>2XL</td><td>52-54</td><td>33</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div data-size-guide-fit-problems>
+    <h2 class="everlooms-size-guide-heading everlooms-size-guide-heading--spaced">Common fit problems</h2>
+    <div class="everlooms-size-guide-fit-grid">
+      <div class="everlooms-size-guide-fit-card">
+        <div class="everlooms-size-guide-fit-card__title">Band rides up at the back</div>
+        <p class="everlooms-size-guide-fit-card__body">The band is likely too loose — try a smaller band size.</p>
+      </div>
+      <div class="everlooms-size-guide-fit-card">
+        <div class="everlooms-size-guide-fit-card__title">Straps slip off the shoulders</div>
+        <p class="everlooms-size-guide-fit-card__body">Tighten the straps; if it persists, the band may be too big.</p>
+      </div>
+      <div class="everlooms-size-guide-fit-card">
+        <div class="everlooms-size-guide-fit-card__title">Waistband rolls or digs</div>
+        <p class="everlooms-size-guide-fit-card__body">Size up for a flatter, no-dig waistband on briefs and boxers.</p>
+      </div>
+      <div class="everlooms-size-guide-fit-card">
+        <div class="everlooms-size-guide-fit-card__title">Between two sizes</div>
+        <p class="everlooms-size-guide-fit-card__body">Most customers size up for everyday comfort, or message us for advice.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="everlooms-size-guide-cta">
+    <div>
+      <div class="everlooms-size-guide-cta__title">Still unsure?</div>
+      <div class="everlooms-size-guide-cta__body">Send your measurements on WhatsApp — we&apos;ll recommend a size.</div>
+    </div>
+    <a href="https://wa.me/923304114118" class="button everlooms-size-guide-cta__button" target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
+  </div>
+
+  <p class="everlooms-size-guide-footnote">Sizing is a guide only and may vary by style and fabric. When in doubt, our team is happy to help before you order.</p>
+</div>
+
+{% render 'everlooms-policy-styles' %}
+
+{% stylesheet %}
+  .everlooms-policy-page.everlooms-size-guide {
+    max-width: 100%;
+  }
+
+  .everlooms-size-guide-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.25rem 0;
+  }
+
+  .everlooms-size-guide-tab {
+    height: 2.75rem;
+    border-radius: 4px;
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #ddd4cf;
+    color: #241e1c;
+  }
+
+  .everlooms-size-guide-tab.is-active {
+    background: #241e1c;
+    border-color: #241e1c;
+    color: #fff;
+  }
+
+  .everlooms-size-guide-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .everlooms-size-guide-heading {
+    font-family: var(--font-heading--family);
+    font-size: 1.375rem;
+    line-height: 1.3;
+    font-weight: 600;
+    color: #241e1c;
+    margin: 0 0 0.75rem;
+  }
+
+  .everlooms-size-guide-heading--spaced {
+    margin-top: 2rem;
+  }
+
+  .everlooms-size-guide-stack--tight {
+    gap: 0.75rem;
+  }
+
+  .everlooms-size-guide-image {
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid #ddd4cf;
+    background: #fff;
+  }
+
+  .everlooms-size-guide-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .everlooms-size-guide-table-wrap {
+    overflow-x: auto;
+    border-radius: 4px;
+    border: 1px solid #ddd4cf;
+    background: #fff;
+  }
+
+  .everlooms-size-guide-table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.875rem;
+  }
+
+  .everlooms-size-guide-table caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .everlooms-size-guide-table thead {
+    background: #f7f7f7;
+  }
+
+  .everlooms-size-guide-table th {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #241e1c;
+    white-space: nowrap;
+    padding: 0.75rem 0.875rem;
+  }
+
+  .everlooms-size-guide-table td {
+    white-space: nowrap;
+    padding: 0.75rem 0.875rem;
+    border-top: 1px solid #f0ebe7;
+    color: #52473f;
+  }
+
+  .everlooms-size-guide-table td:first-child {
+    font-weight: 700;
+    color: #241e1c;
+  }
+
+  .everlooms-size-guide-fit-grid {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (min-width: 550px) {
+    .everlooms-size-guide-fit-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .everlooms-size-guide-fit-card {
+    border-radius: 4px;
+    border: 1px solid #ddd4cf;
+    background: #fff;
+    padding: 1rem;
+  }
+
+  .everlooms-size-guide-fit-card__title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #2d6b7d;
+  }
+
+  .everlooms-size-guide-fit-card__body {
+    margin-top: 0.375rem;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: #52473f;
+  }
+
+  .everlooms-size-guide-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    background: #241e1c;
+    padding: 1.5rem;
+  }
+
+  .everlooms-size-guide-cta__title {
+    font-family: var(--font-heading--family);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .everlooms-size-guide-cta__body {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #e8ddd3;
+  }
+
+  .everlooms-size-guide-cta__button {
+    white-space: nowrap;
+  }
+
+  .everlooms-size-guide-footnote {
+    margin-top: 0.875rem;
+    font-size: 0.75rem;
+    line-height: 1.625;
+    color: #9a8d85;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Size guide content",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}
