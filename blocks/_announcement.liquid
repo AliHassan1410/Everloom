@@ -1,7 +1,15 @@
 
 
+{%- comment -%}
+  The storefront renders two announcement bars from separate section groups:
+  one inside header-group (every page except home) and a standalone one on the
+  home page, which has no header. Keeping their text in sync by hand is easy to
+  get wrong, so a non-empty `announcement_text` theme setting overrides both.
+  Leave that setting empty to edit each bar independently as before.
+{%- endcomment -%}
 {%- assign block_settings = block.settings -%}
-{%- assign plain_text = block_settings.text | strip_newlines | strip_html | strip -%}
+{%- assign announcement_text = settings.announcement_text | default: block_settings.text -%}
+{%- assign plain_text = announcement_text | strip_newlines | strip_html | strip -%}
 {%- assign block_index = section.blocks | find_index: 'id', block.id -%}
 
 {%- unless plain_text == '' -%}
@@ -28,7 +36,7 @@
     aria-hidden="{% if block_index == 0 %}false{% else %}true{% endif %}"
   >
     <p class="announcement-bar__text">
-      {{ block.settings.text }}
+      {{ announcement_text }}
     </p>
 
     {% if block_settings.link != blank %}
@@ -37,7 +45,7 @@
         href="{{ block_settings.link }}"
       >
         <span class="visually-hidden">
-          {{ block_settings.text | strip_html }}
+          {{ announcement_text | strip_html }}
         </span>
       </a>
     {% endif %}

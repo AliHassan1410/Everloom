@@ -57,6 +57,21 @@
     ]
   },
   {
+    "name": "Announcement",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Your storefront has two announcement bars: one inside the header (all pages except home) and a standalone one on the home page, because the home page renders no header. Set the text here once and both bars use it. Leave it empty to go back to editing each bar separately."
+      },
+      {
+        "type": "inline_richtext",
+        "id": "announcement_text",
+        "label": "Announcement text (both bars)",
+        "default": ""
+      }
+    ]
+  },
+  {
     "name": "t:names.colors",
     "settings": [
       {
