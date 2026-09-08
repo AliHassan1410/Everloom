@@ -17,20 +17,7 @@
         "announcement_home": {
           "type": "_announcement",
           "settings": {
-            "text": "QUALITY ESSENTIALS FOR MEN & WOMEN",
-            "font": "var(--font-heading--family)",
-            "font_size": "0.75rem",
-            "weight": "bold",
-            "letter_spacing": "normal",
-            "case": "none",
-            "text_color": "#1A1A1A"
-          },
-          "blocks": {}
-        },
-        "announcement_home_2": {
-          "type": "_announcement",
-          "settings": {
-            "text": "EVERYDAY ESSENTIALS, DONE PROPERLY",
+            "text": "QUALITY ESSENTIALS FOR MEN & WOMEN — EVERYDAY ESSENTIALS, DONE PROPERLY",
             "font": "var(--font-heading--family)",
             "font_size": "0.75rem",
             "weight": "bold",
@@ -42,8 +29,7 @@
         }
       },
       "block_order": [
-        "announcement_home",
-        "announcement_home_2"
+        "announcement_home"
       ],
       "name": "Announcement bar",
       "settings": {
