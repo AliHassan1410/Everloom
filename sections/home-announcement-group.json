@@ -17,7 +17,7 @@
         "announcement_home": {
           "type": "_announcement",
           "settings": {
-            "text": "OUR BIGGEST DROP — FLAT 25% OFF FOR 48 HOURS",
+            "text": "WOVEN FOR EVERYDAY COMFORT — MEN & WOMEN",
             "font": "var(--font-heading--family)",
             "font_size": "0.75rem",
             "weight": "bold",
