@@ -17,7 +17,20 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "WOVEN FOR EVERYDAY COMFORT — MEN & WOMEN",
+            "text": "QUALITY ESSENTIALS FOR MEN & WOMEN",
+            "font": "var(--font-heading--family)",
+            "font_size": "0.75rem",
+            "weight": "bold",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": "#1A1A1A"
+          },
+          "blocks": {}
+        },
+        "announcement_BxgCk9_2": {
+          "type": "_announcement",
+          "settings": {
+            "text": "EVERYDAY ESSENTIALS, DONE PROPERLY",
             "font": "var(--font-heading--family)",
             "font_size": "0.75rem",
             "weight": "bold",
@@ -29,7 +42,8 @@
         }
       },
       "block_order": [
-        "announcement_BxgCk9"
+        "announcement_BxgCk9",
+        "announcement_BxgCk9_2"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
